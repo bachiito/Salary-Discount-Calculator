@@ -3,9 +3,14 @@
     --black: #000000;
     --blue: #0d6efd;
     --green: #198754;
-    --dark-blue: #004643;
+    --dark-green: #157347;
+    --darkest-green: #13653f;
     --gray: #808080;
+    --light-gray: #e9ecef;
     --red: #ff0000;
+    --dark-red: #8b0000;
+    --input-focus: #0d6efd40;
+    --green-focus: 60, 153, 110;
 }
 
 *,
@@ -24,6 +29,12 @@ h1,
     margin: 0;
 }
 
+label {
+    font-size: 1.125rem;
+    display: inline-block;
+    margin-bottom: 0.5em;
+}
+
 .mo-salary::after {
     content: "\002A";
 }
@@ -31,6 +42,16 @@ h1,
 .alert-msg,
 .mo-salary::after {
     color: var(--red);
+}
+
+.input-prefix {
+    font-size: 1rem;
+    padding: 0.5em;
+    background-color: var(--light-gray);
+    border: 1px solid var(--gray);
+    border-radius: 6px;
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
 }
 
 .submit {
@@ -42,25 +63,11 @@ h1,
     border: none;
     border-radius: 5px;
     background-color: var(--green);
-    transition: all 0.6s ease;
-}
-
-.submit:focus-visible {
-    outline: none;
-    box-shadow: 0 0 0 2px var(--white), 0 0 0 4px var(--green);
-}
-
-.github-link:focus-visible {
-    outline: none;
-}
-
-.github-link:focus-visible .fa-github {
-    color: var(--black);
+    transition: all 0.5s ease;
 }
 
 .fa-github {
     color: var(--white);
-    margin-bottom: 0.75em;
     transition: all 0.5s ease;
 }
 
@@ -71,7 +78,15 @@ h1,
 .container {
     width: 90%;
     max-width: 500px;
-    margin: 0 2rem;
+    margin: 0 3rem;
+}
+
+.row {
+    display: flex;
+}
+
+.d-none {
+    display: none;
 }
 
 /* 
@@ -86,11 +101,10 @@ body {
 }
 
 body {
+    font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
     display: flex;
     flex-direction: column;
     margin: 0;
-
-    font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
 }
 
 header,
@@ -104,15 +118,23 @@ footer {
     margin-top: auto;
 }
 
+.footer-body {
+    margin-top: 1rem;
+}
+
 .input-group {
     margin-top: 1rem;
 }
 
 input[type="text"] {
+    font-size: 1rem;
     width: 100%;
     padding: 0.5em;
-    border-radius: 5px;
-    border: 1.5px solid var(--gray);
+    border: 1px solid var(--gray);
+    border-radius: 6px;
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
+    transition: all 0.35s ease;
 }
 
 /* ==============
@@ -126,12 +148,35 @@ input[type="text"] {
 }
 
 @media (hover: hover) {
+    input[type="text"]:focus-visible {
+        outline: none;
+        box-shadow: 0 0 0 0.25rem var(--input-focus);
+    }
+
     .submit:hover {
-        background-color: var(--dark-blue);
+        background-color: var(--dark-green);
+    }
+
+    .submit:active {
+        background-color: var(--darkest-green);
+    }
+
+    .submit:focus-visible {
+        outline: none;
+        box-shadow: 0 0 0 4px rgba(var(--green-focus), 0.5);
+    }
+
+    .github-link:focus-visible {
+        outline: none;
+    }
+
+    .github-link:focus-visible .fa-github {
+        scale: 1.15;
+        color: var(--dark-red);
     }
 
     .fa-github:hover {
-        scale: 1.2;
+        scale: 1.25;
         color: var(--black);
     }
 

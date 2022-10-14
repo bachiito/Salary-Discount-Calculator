@@ -3,7 +3,15 @@
     --black: #000000;
     --blue: #0d6efd;
     --green: #198754;
-    --gray: #dde1e5;
+    --dark-blue: #004643;
+    --gray: #808080;
+    --red: #ff0000;
+}
+
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
 }
 
 /* ===========
@@ -18,10 +26,14 @@ h1,
 
 .mo-salary::after {
     content: "\002A";
-    color: red;
 }
 
-button {
+.alert-msg,
+.mo-salary::after {
+    color: var(--red);
+}
+
+.submit {
     cursor: pointer;
     color: var(--white);
     font-size: 1rem;
@@ -30,10 +42,10 @@ button {
     border: none;
     border-radius: 5px;
     background-color: var(--green);
-    transition: all 0.5s ease;
+    transition: all 0.6s ease;
 }
 
-button:focus-visible {
+.submit:focus-visible {
     outline: none;
     box-shadow: 0 0 0 2px var(--white), 0 0 0 4px var(--green);
 }
@@ -49,6 +61,7 @@ button:focus-visible {
 .fa-github {
     color: var(--white);
     margin-bottom: 0.75em;
+    transition: all 0.5s ease;
 }
 
 /* ===========
@@ -58,8 +71,7 @@ button:focus-visible {
 .container {
     width: 90%;
     max-width: 500px;
-    margin: 0;
-    margin-left: 2rem;
+    margin: 0 2rem;
 }
 
 /* 
@@ -77,6 +89,8 @@ body {
     display: flex;
     flex-direction: column;
     margin: 0;
+
+    font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
 }
 
 header,
@@ -98,12 +112,37 @@ input[type="text"] {
     width: 100%;
     padding: 0.5em;
     border-radius: 5px;
-    border: 1.5px solid grey;
+    border: 1.5px solid var(--gray);
 }
 
 /* ==============
   MEDIA QUERIES
 =============== */
 
+@media (max-width: 550px) {
+    .container {
+        margin: 0 auto;
+    }
+}
+
 @media (hover: hover) {
+    .submit:hover {
+        background-color: var(--dark-blue);
+    }
+
+    .fa-github:hover {
+        scale: 1.2;
+        color: var(--black);
+    }
+
+    .footer-text:hover .fa-heart {
+        color: var(--red);
+        animation: beat 0.5s linear forwards infinite alternate;
+    }
+
+    @keyframes beat {
+        100% {
+            transform: scale(1.25);
+        }
+    }
 }

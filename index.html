@@ -26,7 +26,7 @@
         <main>
             <div class="container">
                 <h2>Input</h2>
-                <form action="">
+                <form>
                     <div class="input-group">
                         <label for="monthly-salary" class="mo-salary">
                             Monthly Salary (in DOP)
@@ -38,7 +38,9 @@
                             autofocus
                             required
                         />
-                        <span class="validation-msg"></span>
+                        <span class="alert-msg">
+                            Este campo es obligatorio
+                        </span>
                     </div>
                     <div class="input-group">
                         <label for="bonifications">
@@ -49,7 +51,7 @@
                             name="bonifications"
                             id="bonifications"
                         />
-                        <span class="validation-msg"></span>
+                        <span class="alert-msg"></span>
                     </div>
                     <div class="input-group">
                         <label for="extra-hours">Extra Hours (in DOP)</label>
@@ -58,9 +60,9 @@
                             name="extra-hours"
                             id="extra-hours"
                         />
-                        <span class="validation-msg"></span>
+                        <span class="alert-msg"></span>
                     </div>
-                    <button type="submit">Calculate</button>
+                    <button type="submit" class="submit">Calculate</button>
                 </form>
 
                 <h2>Results</h2>

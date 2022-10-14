@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Salary Discount Calculator</title>
+
+        <!-- Font Awesome -->
+        <script
+            src="https://kit.fontawesome.com/4893fb387f.js"
+            crossorigin="anonymous"
+        ></script>
+
+        <!-- CSS -->
+        <link rel="stylesheet" href="css/style.css" />
+
+        <!-- JavaScript -->
+        <script defer src="js/index.js"></script>
+    </head>
+
+    <body>
+        <header>
+            <h1>Salary Discount Calculator</h1>
+        </header>
+        <main>
+            <div class="container">
+                <h2>Input</h2>
+                <form action="">
+                    <div class="input-group">
+                        <label for="monthly-salary" class="mo-salary">
+                            Monthly Salary (in DOP)
+                        </label>
+                        <input
+                            type="text"
+                            name="monthly-salary"
+                            id="monthly-salary"
+                            autofocus
+                            required
+                        />
+                        <span class="validation-msg"></span>
+                    </div>
+                    <div class="input-group">
+                        <label for="bonifications">
+                            Bonifications (in DOP)
+                        </label>
+                        <input
+                            type="text"
+                            name="bonifications"
+                            id="bonifications"
+                        />
+                        <span class="validation-msg"></span>
+                    </div>
+                    <div class="input-group">
+                        <label for="extra-hours">Extra Hours (in DOP)</label>
+                        <input
+                            type="text"
+                            name="extra-hours"
+                            id="extra-hours"
+                        />
+                        <span class="validation-msg"></span>
+                    </div>
+                    <button type="submit">Calculate</button>
+                </form>
+
+                <h2>Results</h2>
+                <p class="result"></p>
+            </div>
+        </main>
+        <footer>
+            <a
+                href="https://github.com/bachiito"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="github-link"
+            >
+                <i class="fa-brands fa-github fa-2xl"></i>
+            </a>
+            <p class="footer-text">
+                &copy; Copyright <span class="year"></span> <br />
+                Made with <i class="fa-solid fa-heart"></i> by bachito
+            </p>
+        </footer>
+    </body>
+</html>

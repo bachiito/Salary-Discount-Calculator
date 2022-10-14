@@ -1,0 +1,109 @@
+:root {
+    --white: #ffffff;
+    --black: #000000;
+    --blue: #0d6efd;
+    --green: #198754;
+    --gray: #dde1e5;
+}
+
+/* ===========
+  TYPOGRAPHY
+=========== */
+
+h1,
+.footer-text {
+    color: var(--white);
+    margin: 0;
+}
+
+.mo-salary::after {
+    content: "\002A";
+    color: red;
+}
+
+button {
+    cursor: pointer;
+    color: var(--white);
+    font-size: 1rem;
+    padding: 0.5em 1em;
+    margin-top: 1em;
+    border: none;
+    border-radius: 5px;
+    background-color: var(--green);
+    transition: all 0.5s ease;
+}
+
+button:focus-visible {
+    outline: none;
+    box-shadow: 0 0 0 2px var(--white), 0 0 0 4px var(--green);
+}
+
+.github-link:focus-visible {
+    outline: none;
+}
+
+.github-link:focus-visible .fa-github {
+    color: var(--black);
+}
+
+.fa-github {
+    color: var(--white);
+    margin-bottom: 0.75em;
+}
+
+/* ===========
+  LAYOUT
+=========== */
+
+.container {
+    width: 90%;
+    max-width: 500px;
+    margin: 0;
+    margin-left: 2rem;
+}
+
+/* 
+ * With the body having 100% height and display flex
+ * we can use margin top auto in the footer to make it
+ * stick to the bottom of the page
+ */
+
+html,
+body {
+    height: 100%;
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+    margin: 0;
+}
+
+header,
+footer {
+    text-align: center;
+    padding: 1rem;
+    background-color: var(--blue);
+}
+
+footer {
+    margin-top: auto;
+}
+
+.input-group {
+    margin-top: 1rem;
+}
+
+input[type="text"] {
+    width: 100%;
+    padding: 0.5em;
+    border-radius: 5px;
+    border: 1.5px solid grey;
+}
+
+/* ==============
+  MEDIA QUERIES
+=============== */
+
+@media (hover: hover) {
+}

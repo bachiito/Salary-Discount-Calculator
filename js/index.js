@@ -1,9 +1,14 @@
 let salary = 0;
 let extraHours = 0;
 let bonifications = 0;
+let AFPDiscount = 0;
+let SFSDiscount = 0;
 let validInputs = true;
-const AFPDiscount = 0.0287;
-const SFSDiscount = 0.0304;
+
+const AFPercentage = 0.0287;
+const AFPMaxValue = 8954.4;
+const SFSPercentage = 0.0304;
+const SFSMaxValue = 4742.4;
 const year = new Date().getFullYear();
 const requiredId = "monthly-salary";
 
@@ -58,24 +63,52 @@ function reviewInputs(inputs) {
 }
 
 function showResult() {
-    const finalSalary = formartNumber(
-        salary - salary * AFPDiscount - salary * SFSDiscount
-    );
-    const afterAFP = formartNumber(salary * AFPDiscount);
-    const afterSFS = formartNumber(salary * SFSDiscount);
-    salary = formartNumber(salary);
+    AFPDiscount = getDiscount(salary * AFPercentage, "AFP");
+    SFSDiscount = getDiscount(salary * SFSPercentage, "SFS");
+
+    console.log(`EXTRA HOURS: ${extraHours}`);
+
+    salary = formatNumber(salary);
 
     result.innerText = `Salary: $${salary}
-        AFP discount: $${afterAFP}
-        SFS discount: $${afterSFS}
-        Salary after discounts: $${finalSalary}
+        AFP discount: $${AFPDiscount}
+        SFS discount: $${SFSDiscount}
+        Salary after discounts: 
     `;
+}
+
+function getTaxesDiscount(salary) {}
+
+function getDiscount(salary, entity) {
+    switch (entity) {
+        case "AFP":
+            if (salary > AFPMaxValue) {
+                return formatNumber(AFPMaxValue);
+            }
+            return formatNumber(salary);
+
+        case "SFS":
+            if (salary > SFSMaxValue) {
+                return formatNumber(SFSMaxValue);
+            }
+            return formatNumber(salary);
+
+        default:
+            return "Unable to get this value.";
+    }
+}
+
+function formatNumber(number) {
+    return new Intl.NumberFormat(undefined, {
+        style: "currency",
+        currency: "DOP",
+    }).format(number);
 }
 
 function assignValues() {
     salary = document.querySelector(`#${requiredId}`).value;
-    bonifications = document.querySelector("#bonifications").value;
     extraHours = document.querySelector("#extra-hours").value;
+    bonifications = document.querySelector("#bonifications").value;
 }
 
 function invalidateInput(alert) {
@@ -83,13 +116,4 @@ function invalidateInput(alert) {
     alert.classList.remove("d-none");
 }
 
-function formartNumber(number) {
-    return new Intl.NumberFormat().format(number);
-}
-
 copyrightYear.textContent = year;
-
-/* 
-    After discounting AFP, SFS and taxes from your salary it is equal to DOP$ 
-    ${new Intl.NumberFormat().format(finalSalary)} 
-*/

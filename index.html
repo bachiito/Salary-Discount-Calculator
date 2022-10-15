@@ -25,18 +25,19 @@
         </header>
         <main>
             <div class="container">
-                <h2>Input</h2>
+                <h2 class="subtitle">Input</h2>
                 <form>
                     <div class="input-group">
                         <label for="monthly-salary" class="mo-salary">
                             Monthly Salary (in DOP)
                         </label>
                         <div class="row">
-                            <span class="input-prefix">RD$</span>
+                            <span class="input-prefix">$DOP</span>
                             <input
                                 type="text"
                                 name="monthly-salary"
                                 id="monthly-salary"
+                                inputmode="numeric"
                                 autofocus
                             />
                         </div>
@@ -49,11 +50,12 @@
                             Bonifications (in DOP)
                         </label>
                         <div class="row">
-                            <span class="input-prefix">RD$</span>
+                            <span class="input-prefix">$DOP</span>
                             <input
                                 type="text"
                                 name="bonifications"
                                 id="bonifications"
+                                inputmode="numeric"
                             />
                         </div>
                         <span class="alert-msg d-none">
@@ -63,11 +65,12 @@
                     <div class="input-group">
                         <label for="extra-hours">Extra Hours (in DOP)</label>
                         <div class="row">
-                            <span class="input-prefix">RD$</span>
+                            <span class="input-prefix">$DOP</span>
                             <input
                                 type="text"
                                 name="extra-hours"
                                 id="extra-hours"
+                                inputmode="numeric"
                             />
                         </div>
                         <span class="alert-msg d-none">
@@ -77,7 +80,7 @@
                     <button type="submit" class="submit">Calculate</button>
                 </form>
 
-                <h2>Results</h2>
+                <h2 class="subtitle">Results</h2>
                 <p class="result"></p>
             </div>
         </main>

@@ -10,7 +10,7 @@ const copyrightYear = document.querySelector(".year");
 
 salaryForm.addEventListener("submit", (e) => {
     e.preventDefault();
-    resetCopyBtn();
+    copyBtnChangeIcon();
     resultList.classList.add("d-none");
     validInputs = true;
 
@@ -167,7 +167,7 @@ copyBtn.addEventListener("click", () => {
     }, 2000);
 });
 
-function resetCopyBtn() {
+function copyBtnChangeIcon() {
     const copyIcon = "<i class='fa-regular fa-copy fa-lg'></i>";
     copyBtn.setAttribute("title", "Copy");
     copyBtn.innerHTML = copyIcon;

@@ -152,10 +152,19 @@ function invalidateInput(alert) {
 }
 
 copyBtn.addEventListener("click", () => {
+    const salary = inputSalary.value;
     const copiedIcon = "<i class='fa-regular fa-paste fa-lg'></i>";
+
     navigator.clipboard.writeText(resultList.innerText);
-    copyBtn.setAttribute("title", "Copied to clipboard");
     copyBtn.innerHTML = copiedIcon;
+    copyBtn.setAttribute("title", "Copied");
+    inputSalary.value = "Copied!";
+    inputSalary.style.color = "red";
+
+    setTimeout(() => {
+        inputSalary.value = salary;
+        inputSalary.style.color = "black";
+    }, 2000);
 });
 
 function resetCopyBtn() {

@@ -4,19 +4,22 @@ const AFPMaxValue = 8954.4;
 const SFSPercentage = 0.0304;
 const SFSMaxValue = 4742.4;
 const monthsInYear = 12;
-const actualYear = new Date().getFullYear();
 const requiredId = "monthly-salary";
+const white = "#ffffff";
+const green = "#198754";
 
 const salaryForm = document.querySelector("#salary-form");
 const inputSalary = document.querySelector(`#${requiredId}`);
 const alertMsg = document.querySelector(".alert-msg");
 const resultList = document.querySelector(".result-ul");
+const copyBtn = document.querySelector(".copy");
 const copyrightYear = document.querySelector(".year");
 
 salaryForm.addEventListener("submit", (e) => {
     e.preventDefault();
-    validInputs = true;
+    resetCopyBtn();
     resultList.classList.add("d-none");
+    validInputs = true;
 
     if (reviewInputs(inputSalary)) {
         showResult();
@@ -58,6 +61,7 @@ function showResult() {
     });
 
     resultList.classList.remove("d-none");
+    copyBtn.classList.remove("d-none");
 }
 
 function getIncomTxDiscount(salary, taxesEscale) {
@@ -148,4 +152,20 @@ function invalidateInput(alert) {
     alert.classList.remove("d-none");
 }
 
-copyrightYear.textContent = actualYear;
+function resetCopyBtn() {
+    const copyIcon = "<i class='fa-regular fa-copy fa-lg'></i>";
+    copyBtn.setAttribute("title", "Copy");
+    copyBtn.innerHTML = copyIcon;
+    copyBtn.classList.add("d-none");
+}
+
+copyBtn.addEventListener("click", () => {
+    const copiedIcon = "<i class='fa-regular fa-paste fa-lg'></i>";
+    navigator.clipboard.writeText(resultList.innerText);
+    copyBtn.style.backgroundColor = green;
+    copyBtn.style.color = "#F0EAD6";
+    copyBtn.setAttribute("title", "Copied to clipboard");
+    copyBtn.innerHTML = copiedIcon;
+});
+
+copyrightYear.textContent = new Date().getFullYear();

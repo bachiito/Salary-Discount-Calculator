@@ -66,8 +66,13 @@ label {
     border-bottom-right-radius: 0;
 }
 
-.submit {
+.submit,
+.copy {
     cursor: pointer;
+    transition: all 0.5s ease;
+}
+
+.submit {
     color: var(--white);
     font-size: 1rem;
     padding: 0.5em 1em;
@@ -75,13 +80,13 @@ label {
     border: none;
     border-radius: 5px;
     background-color: var(--green);
-    transition: all 0.5s ease;
 }
 
 .copy {
     position: absolute;
     top: 10px;
     right: 0;
+    padding: 0.25em 0.5em;
 }
 
 .fa-github {

@@ -84,9 +84,12 @@ label {
 
 .copy {
     position: absolute;
-    top: 10px;
-    right: 0;
-    padding: 0.25em 0.5em;
+    top: 2.5px;
+    right: 380px;
+    padding: 0.5em;
+    border: 1px solid var(--gray);
+    border-radius: 3px;
+    background-color: var(--light-gray);
 }
 
 .fa-github {
@@ -174,6 +177,11 @@ input[type="text"] {
     transition: all 0.35s ease;
 }
 
+input[type="text"]:focus-visible {
+    outline: none;
+    box-shadow: 0 0 0 0.25rem var(--input-focus);
+}
+
 .result-header {
     position: relative;
 }
@@ -192,14 +200,13 @@ input[type="text"] {
     .container {
         margin: 0 auto;
     }
+
+    .copy {
+        right: 0;
+    }
 }
 
 @media (hover: hover) {
-    input[type="text"]:focus-visible {
-        outline: none;
-        box-shadow: 0 0 0 0.25rem var(--input-focus);
-    }
-
     .submit:hover {
         background-color: var(--dark-green);
     }

@@ -1,12 +1,5 @@
 let validInputs = true;
-const AFPercentage = 0.0287;
-const AFPMaxValue = 8954.4;
-const SFSPercentage = 0.0304;
-const SFSMaxValue = 4742.4;
-const monthsInYear = 12;
 const requiredId = "monthly-salary";
-const white = "#ffffff";
-const green = "#198754";
 
 const salaryForm = document.querySelector("#salary-form");
 const inputSalary = document.querySelector(`#${requiredId}`);
@@ -34,6 +27,8 @@ function showResult() {
         867123: 0.25,
     };
 
+    const AFPercentage = 0.0287;
+    const SFSPercentage = 0.0304;
     const salary = document.querySelector(`#${requiredId}`).value;
     const AFPDiscount = getDiscount(salary * AFPercentage, "AFP");
     const SFSDiscount = getDiscount(salary * SFSPercentage, "SFS");
@@ -69,6 +64,7 @@ function getIncomTxDiscount(salary, taxesEscale) {
     let percentage = 0;
     let percentageCarryOver = 0;
     let anualSalAfterExcess = 0;
+    const monthsInYear = 12;
     const twentyPercentCOver = 31216;
     const twentyFivePercentCOver = 79776;
     const anualSalary = salary * monthsInYear;
@@ -91,6 +87,9 @@ function getIncomTxDiscount(salary, taxesEscale) {
 }
 
 function getDiscount(salary, entity) {
+    const AFPMaxValue = 8954.4;
+    const SFSMaxValue = 4742.4;
+
     switch (entity) {
         case "AFP":
             if (salary > AFPMaxValue) {
@@ -152,20 +151,18 @@ function invalidateInput(alert) {
     alert.classList.remove("d-none");
 }
 
+copyBtn.addEventListener("click", () => {
+    const copiedIcon = "<i class='fa-regular fa-paste fa-lg'></i>";
+    navigator.clipboard.writeText(resultList.innerText);
+    copyBtn.setAttribute("title", "Copied to clipboard");
+    copyBtn.innerHTML = copiedIcon;
+});
+
 function resetCopyBtn() {
     const copyIcon = "<i class='fa-regular fa-copy fa-lg'></i>";
     copyBtn.setAttribute("title", "Copy");
     copyBtn.innerHTML = copyIcon;
     copyBtn.classList.add("d-none");
 }
-
-copyBtn.addEventListener("click", () => {
-    const copiedIcon = "<i class='fa-regular fa-paste fa-lg'></i>";
-    navigator.clipboard.writeText(resultList.innerText);
-    copyBtn.style.backgroundColor = green;
-    copyBtn.style.color = "#F0EAD6";
-    copyBtn.setAttribute("title", "Copied to clipboard");
-    copyBtn.innerHTML = copiedIcon;
-});
 
 copyrightYear.textContent = new Date().getFullYear();

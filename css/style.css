@@ -35,6 +35,7 @@ h2.subtitle {
 
 label,
 .result {
+    font-size: 1.125rem;
     display: block;
     margin: 0.25em 0;
 }

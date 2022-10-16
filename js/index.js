@@ -1,83 +1,79 @@
-let salary = 0;
-let extraHours = 0;
-let bonifications = 0;
 let validInputs = true;
-
-const taxesAnualEscale = {
-    /* Anual Salary & Tax Rent */
-    416220: 0.15,
-    624329: 0.2,
-    867123: 0.25,
-};
-
 const AFPercentage = 0.0287;
 const AFPMaxValue = 8954.4;
 const SFSPercentage = 0.0304;
 const SFSMaxValue = 4742.4;
 const monthsInYear = 12;
-const year = new Date().getFullYear();
+const actualYear = new Date().getFullYear();
 const requiredId = "monthly-salary";
 
-const form = document.querySelector("form");
-const inputGroups = document.querySelectorAll(".input-group");
-const result = document.querySelector(".result");
+const salaryForm = document.querySelector("#salary-form");
+const inputSalary = document.querySelector(`#${requiredId}`);
+const alertMsg = document.querySelector(".alert-msg");
+const discountResult = document.querySelector(".result");
 const copyrightYear = document.querySelector(".year");
 
-form.addEventListener("submit", (e) => {
-    validInputs = true;
+salaryForm.addEventListener("submit", (e) => {
     e.preventDefault();
+    validInputs = true;
 
-    if (reviewInputs(inputGroups)) {
-        assignValues();
+    if (reviewInputs(inputSalary)) {
         showResult();
+        return;
     }
+
+    discountResult.textContent = "";
 });
 
 function showResult() {
-    let AFPDiscount = getDiscount(salary * AFPercentage, "AFP");
-    let SFSDiscount = getDiscount(salary * SFSPercentage, "SFS");
-    let salaryDiscounted = salary - AFPDiscount - SFSDiscount;
-    let taxDiscount = getTaxDiscount(salaryDiscounted, taxesAnualEscale);
-    let netSalary = salaryDiscounted - taxDiscount;
-    let discounted = AFPDiscount + SFSDiscount + taxDiscount;
+    const incomeTaxScale = {
+        /* Anual Salary & Income Tax Percentage */
+        416220: 0.15,
+        624329: 0.2,
+        867123: 0.25,
+    };
 
-    result.innerText = `Salary: $${salary}
+    const salary = document.querySelector(`#${requiredId}`).value;
+    const AFPDiscount = getDiscount(salary * AFPercentage, "AFP");
+    const SFSDiscount = getDiscount(salary * SFSPercentage, "SFS");
+    const salDiscounted = salary - AFPDiscount - SFSDiscount;
+    const incomeTaxDiscount = getIncomTxDiscount(salDiscounted, incomeTaxScale);
+    const discounted = AFPDiscount + SFSDiscount + incomeTaxDiscount;
+    const netSalary = salDiscounted - incomeTaxDiscount;
+
+    discountResult.innerText = `Salary: $${formatNumber(salary)}
         AFP discount: $${formatNumber(AFPDiscount)}
         SFS discount: $${formatNumber(SFSDiscount)}
-        Tax dicount: $${formatNumber(taxDiscount)}
+        Income Tax dicount: $${formatNumber(incomeTaxDiscount)}
         Total discount: $${formatNumber(discounted)}
         Net salary: $${formatNumber(netSalary)}
     `;
 }
 
-function getTaxDiscount(salary, taxesEscale) {
-    let taxExcedent = 0;
-    let taxPercentage = 0;
-    let taxExcedentAdded = 0;
-    let anualAfterExcedent = 0;
-    let anualSalary = salary * monthsInYear;
+function getIncomTxDiscount(salary, taxesEscale) {
+    let excess = 0;
+    let percentage = 0;
+    let percentageCarryOver = 0;
+    let anualSalAfterExcess = 0;
+    const twentyPercentCOver = 31216;
+    const twentyFivePercentCOver = 79776;
+    const anualSalary = salary * monthsInYear;
 
-    for (const anualRent of Object.keys(taxesEscale).reverse()) {
-        if (anualSalary > anualRent) {
-            taxExcedent = anualRent;
-            taxPercentage = taxesEscale[anualRent];
+    for (const anualSalExcess of Object.keys(taxesEscale).reverse()) {
+        if (anualSalary > anualSalExcess) {
+            excess = anualSalExcess;
+            percentage = taxesEscale[anualSalExcess];
             break;
         }
     }
 
-    if (taxPercentage === 0.2) taxExcedentAdded = 31216;
-    if (taxPercentage === 0.25) taxExcedentAdded = 79776;
+    if (percentage === 0.2) percentageCarryOver = twentyPercentCOver;
+    if (percentage === 0.25) percentageCarryOver = twentyFivePercentCOver;
 
-    anualAfterExcedent = (anualSalary - taxExcedent) * taxPercentage;
+    anualSalAfterExcess = (anualSalary - excess) * percentage;
 
-    console.log(`Tax Excedent: ${taxExcedent}`);
-    console.log(`Tax Excedent Added: ${taxExcedentAdded}`);
-    console.log(`Tax Percentage: ${taxPercentage}`);
-    console.log(`Anual Salary: ${anualSalary}`);
-    console.log(`Anual Salary After Excedent: ${anualAfterExcedent}`);
-
-    if (taxPercentage === 0) return 0;
-    return (anualAfterExcedent + taxExcedentAdded) / monthsInYear;
+    if (percentage === 0) return 0;
+    return (anualSalAfterExcess + percentageCarryOver) / monthsInYear;
 }
 
 function getDiscount(salary, entity) {
@@ -99,38 +95,32 @@ function getDiscount(salary, entity) {
     }
 }
 
-function reviewInputs(inputsGroups) {
-    for (const inputGroup of inputsGroups) {
-        const input = inputGroup.querySelector("input");
-        const alertMsg = inputGroup.querySelector(".alert-msg");
-
-        if (input.getAttribute("id") === requiredId && !input.value.trim()) {
-            alertMsg.textContent = "This field is required.";
-            invalidateInput(alertMsg);
-            continue;
-        }
-
-        if (input.value.includes(",")) {
-            alertMsg.textContent = "Commas are not allowed.";
-            invalidateInput(alertMsg);
-            continue;
-        }
-
-        if (isNaN(input.value)) {
-            alertMsg.textContent = "Enter only numbers.";
-            invalidateInput(alertMsg);
-            continue;
-        }
-
-        if (input.value < 0) {
-            alertMsg.textContent = "Enter only positive numbers.";
-            invalidateInput(alertMsg);
-            continue;
-        }
-
-        alertMsg.classList.add("d-none");
+function reviewInputs(input) {
+    if (input.getAttribute("id") === requiredId && !input.value.trim()) {
+        alertMsg.textContent = "This field is required.";
+        invalidateInput(alertMsg);
+        return;
     }
 
+    if (input.value.includes(",")) {
+        alertMsg.textContent = "Commas are not allowed.";
+        invalidateInput(alertMsg);
+        return;
+    }
+
+    if (isNaN(input.value)) {
+        alertMsg.textContent = "Enter only numbers.";
+        invalidateInput(alertMsg);
+        return;
+    }
+
+    if (input.value < 0) {
+        alertMsg.textContent = "Enter only positive numbers.";
+        invalidateInput(alertMsg);
+        return;
+    }
+
+    alertMsg.classList.add("d-none");
     return validInputs;
 }
 
@@ -138,13 +128,9 @@ function formatNumber(number) {
     return new Intl.NumberFormat(undefined, {
         style: "currency",
         currency: "DOP",
-    }).format(number);
-}
-
-function assignValues() {
-    salary = document.querySelector(`#${requiredId}`).value;
-    extraHours = document.querySelector("#extra-hours").value;
-    bonifications = document.querySelector("#bonifications").value;
+    })
+        .format(number)
+        .substring(4); // To remove "DOP " from formatted numbers
 }
 
 function invalidateInput(alert) {
@@ -152,4 +138,4 @@ function invalidateInput(alert) {
     alert.classList.remove("d-none");
 }
 
-copyrightYear.textContent = year;
+copyrightYear.textContent = actualYear;

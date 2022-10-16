@@ -25,51 +25,58 @@
         </header>
         <main>
             <div class="container">
-                <h2 class="subtitle">Input</h2>
-                <form id="salary-form">
-                    <div class="input-group">
-                        <label for="monthly-salary" class="mo-salary">
-                            Monthly Salary (in DOP)
-                        </label>
-                        <div class="row">
-                            <span class="input-prefix">$DOP</span>
-                            <input
-                                type="text"
-                                name="monthly-salary"
-                                id="monthly-salary"
-                                inputmode="numeric"
-                                autofocus
-                            />
+                <section class="input-section">
+                    <h2 class="subtitle">Input</h2>
+                    <form id="salary-form">
+                        <div class="input-group">
+                            <label for="monthly-salary" class="mo-salary">
+                                Monthly Salary (in DOP)
+                            </label>
+                            <div class="row">
+                                <span class="input-prefix">$DOP</span>
+                                <input
+                                    type="text"
+                                    name="monthly-salary"
+                                    id="monthly-salary"
+                                    inputmode="numeric"
+                                    autofocus
+                                />
+                            </div>
+                            <span class="alert-msg d-none">
+                                Please enter only numbers.
+                            </span>
                         </div>
-                        <span class="alert-msg d-none">
-                            Please enter only numbers.
-                        </span>
+                        <button type="submit" class="submit">Calculate</button>
+                    </form>
+                </section>
+                <section class="result-section">
+                    <div class="result-header">
+                        <h2 class="subtitle">Results</h2>
+                        <button class="copy" title="Copy">
+                            <i class="fa-regular fa-copy"></i>
+                        </button>
                     </div>
-                    <button type="submit" class="submit">Calculate</button>
-                </form>
-
-                <h2 class="subtitle">Results</h2>
-
-                <ul class="result-ul d-none">
-                    <li class="result-li">
-                        <span class="fw-500">Salary: </span>
-                    </li>
-                    <li class="result-li">
-                        <span class="fw-500">AFP Discount: </span>
-                    </li>
-                    <li class="result-li">
-                        <span class="fw-500">SFS Discount: </span>
-                    </li>
-                    <li class="result-li">
-                        <span class="fw-500">Income Tax Discount: </span>
-                    </li>
-                    <li class="result-li">
-                        <span class="fw-500">Total Discount: </span>
-                    </li>
-                    <li class="result-li">
-                        <span class="fw-500">Net Salary: </span>
-                    </li>
-                </ul>
+                    <ul class="result-ul d-none">
+                        <li class="result-li">
+                            <span class="fw-500">Salary: </span>
+                        </li>
+                        <li class="result-li">
+                            <span class="fw-500">AFP Discount: </span>
+                        </li>
+                        <li class="result-li">
+                            <span class="fw-500">SFS Discount: </span>
+                        </li>
+                        <li class="result-li">
+                            <span class="fw-500">Income Tax Discount: </span>
+                        </li>
+                        <li class="result-li">
+                            <span class="fw-500">Total Discount: </span>
+                        </li>
+                        <li class="result-li">
+                            <span class="fw-500">Net Salary: </span>
+                        </li>
+                    </ul>
+                </section>
             </div>
         </main>
         <footer>

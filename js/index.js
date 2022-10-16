@@ -53,7 +53,7 @@ function showResult() {
         const result = `$${conversionResults[index]}`;
         const listItemSpan = listItem.querySelector(".fw-500");
 
-        listItem.textContent = "";
+        listItem.innerHTML = "";
         listItem.append(listItemSpan, result);
     });
 

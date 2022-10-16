@@ -10,19 +10,17 @@ const requiredId = "monthly-salary";
 const salaryForm = document.querySelector("#salary-form");
 const inputSalary = document.querySelector(`#${requiredId}`);
 const alertMsg = document.querySelector(".alert-msg");
-const discountResult = document.querySelector(".result");
+const resultList = document.querySelector(".result-ul");
 const copyrightYear = document.querySelector(".year");
 
 salaryForm.addEventListener("submit", (e) => {
     e.preventDefault();
     validInputs = true;
+    resultList.classList.add("d-none");
 
     if (reviewInputs(inputSalary)) {
         showResult();
-        return;
     }
-
-    discountResult.textContent = "";
 });
 
 function showResult() {
@@ -40,14 +38,26 @@ function showResult() {
     const incomeTaxDiscount = getIncomTxDiscount(salDiscounted, incomeTaxScale);
     const discounted = AFPDiscount + SFSDiscount + incomeTaxDiscount;
     const netSalary = salDiscounted - incomeTaxDiscount;
+    const resultListItems = document.querySelectorAll(".result-li");
 
-    discountResult.innerText = `Salary: $${formatNumber(salary)}
-        AFP discount: $${formatNumber(AFPDiscount)}
-        SFS discount: $${formatNumber(SFSDiscount)}
-        Income Tax dicount: $${formatNumber(incomeTaxDiscount)}
-        Total discount: $${formatNumber(discounted)}
-        Net salary: $${formatNumber(netSalary)}
-    `;
+    const conversionResults = [
+        formatNumber(salary),
+        formatNumber(AFPDiscount),
+        formatNumber(SFSDiscount),
+        formatNumber(incomeTaxDiscount),
+        formatNumber(discounted),
+        formatNumber(netSalary),
+    ];
+
+    resultListItems.forEach((listItem, index) => {
+        const result = `$${conversionResults[index]}`;
+        const listItemSpan = listItem.querySelector(".fw-500");
+
+        listItem.textContent = "";
+        listItem.append(listItemSpan, result);
+    });
+
+    resultList.classList.remove("d-none");
 }
 
 function getIncomTxDiscount(salary, taxesEscale) {

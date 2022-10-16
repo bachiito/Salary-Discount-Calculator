@@ -34,10 +34,17 @@ h2.subtitle {
 }
 
 label,
-.result {
+.result-li {
     font-size: 1.125rem;
     display: block;
-    margin: 0.25em 0;
+}
+
+label {
+    margin: 0.5em 0;
+}
+
+.result-li {
+    margin-top: 1em;
 }
 
 .mo-salary::after {
@@ -74,6 +81,10 @@ label,
 .fa-github {
     color: var(--white);
     transition: all 0.5s ease;
+}
+
+.fw-500 {
+    font-weight: 500;
 }
 
 /* ===========
@@ -141,6 +152,11 @@ input[type="text"] {
     border-top-left-radius: 0;
     border-bottom-left-radius: 0;
     transition: all 0.35s ease;
+}
+
+.result-ul {
+    padding: 0;
+    list-style: none;
 }
 
 /* ==============

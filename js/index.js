@@ -142,8 +142,7 @@ function formatNumber(number) {
         style: "currency",
         currency: "DOP",
     })
-        .format(number)
-        .substring(4); // To remove "DOP " from formatted numbers
+        .format(number);
 }
 
 function invalidateInput(alert) {

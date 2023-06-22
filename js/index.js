@@ -48,7 +48,7 @@ function showResult() {
     ];
 
     resultListItems.forEach((listItem, index) => {
-        const result = `$${conversionResults[index]}`;
+        const result = `${conversionResults[index]}`;
         const listItemSpan = listItem.querySelector(".fw-500");
 
         listItem.innerHTML = "";
